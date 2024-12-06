@@ -38,7 +38,7 @@ case "$TARGET_OS" in
 
   linux)
     sudo apt-get update
-    sudo apt-get install -y cmake pkg-config
+    sudo apt-get install -y cmake pkg-config tree
 
     if [ "$TARGET_ENVIRONMENT" == "musl" ]; then
 

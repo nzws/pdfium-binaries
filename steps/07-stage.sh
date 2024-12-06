@@ -24,6 +24,8 @@ rm -f "$STAGING/include/DEPS"
 rm -f "$STAGING/include/README"
 rm -f "$STAGING/include/PRESUBMIT.py"
 
+tree
+
 case "$OS" in
   android|linux)
     mv "$BUILD/libpdfium.so" "$STAGING_LIB"
