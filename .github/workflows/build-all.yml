@@ -134,8 +134,8 @@ jobs:
       target_cpu: x86
       enable_v8: true
 
-  ios_arm64:
-    name: iOS ARM64
+  ios_catalyst_arm64:
+    name: iOS catalyst ARM64
     uses: ./.github/workflows/build.yml
     with:
       branch: ${{ github.event.inputs.branch }}
@@ -143,12 +143,13 @@ jobs:
       is_debug: ${{ github.event.inputs.is_debug == 'true' }}
       target_os: ios
       target_cpu: arm64
+      target_environment: catalyst
       enable_v8: false
 
-  ios_arm64_v8:
-    name: iOS ARM64 V8
+  ios_catalyst_arm64_v8:
+    name: iOS catalyst ARM64 V8
     if: github.event.inputs.enable_v8 == 'true'
-    needs: ios_arm64
+    needs: ios_catalyst_arm64
     uses: ./.github/workflows/build.yml
     with:
       branch: ${{ github.event.inputs.branch }}
@@ -156,10 +157,11 @@ jobs:
       is_debug: ${{ github.event.inputs.is_debug == 'true' }}
       target_os: ios
       target_cpu: arm64
+      target_environment: catalyst
       enable_v8: true
 
-  ios_x64:
-    name: iOS x64
+  ios_catalyst_x64:
+    name: iOS catalyst x64
     uses: ./.github/workflows/build.yml
     with:
       branch: ${{ github.event.inputs.branch }}
@@ -167,12 +169,13 @@ jobs:
       is_debug: ${{ github.event.inputs.is_debug == 'true' }}
       target_os: ios
       target_cpu: x64
+      target_environment: catalyst
       enable_v8: false
 
-  ios_x64_v8:
-    name: iOS x64 V8
+  ios_catalyst_x64_v8:
+    name: iOS catalyst x64 V8
     if: github.event.inputs.enable_v8 == 'true'
-    needs: ios_x64
+    needs: ios_catalyst_x64
     uses: ./.github/workflows/build.yml
     with:
       branch: ${{ github.event.inputs.branch }}
@@ -180,6 +183,85 @@ jobs:
       is_debug: ${{ github.event.inputs.is_debug == 'true' }}
       target_os: ios
       target_cpu: x64
+      target_environment: catalyst
+      enable_v8: true
+
+  ios_device_arm64:
+    name: iOS device ARM64
+    uses: ./.github/workflows/build.yml
+    with:
+      branch: ${{ github.event.inputs.branch }}
+      version: ${{ github.event.inputs.version }}
+      is_debug: ${{ github.event.inputs.is_debug == 'true' }}
+      target_os: ios
+      target_cpu: arm64
+      target_environment: device
+      enable_v8: false
+
+  ios_device_arm64_v8:
+    name: iOS device ARM64 V8
+    if: github.event.inputs.enable_v8 == 'true'
+    needs: ios_device_arm64
+    uses: ./.github/workflows/build.yml
+    with:
+      branch: ${{ github.event.inputs.branch }}
+      version: ${{ github.event.inputs.version }}
+      is_debug: ${{ github.event.inputs.is_debug == 'true' }}
+      target_os: ios
+      target_cpu: arm64
+      target_environment: device
+      enable_v8: true
+
+  ios_simulator_arm64:
+    name: iOS simulator ARM64
+    uses: ./.github/workflows/build.yml
+    with:
+      branch: ${{ github.event.inputs.branch }}
+      version: ${{ github.event.inputs.version }}
+      is_debug: ${{ github.event.inputs.is_debug == 'true' }}
+      target_os: ios
+      target_cpu: arm64
+      target_environment: simulator
+      enable_v8: false
+
+  ios_simulator_arm64_v8:
+    name: iOS simulator ARM64 V8
+    if: github.event.inputs.enable_v8 == 'true'
+    needs: ios_simulator_arm64
+    uses: ./.github/workflows/build.yml
+    with:
+      branch: ${{ github.event.inputs.branch }}
+      version: ${{ github.event.inputs.version }}
+      is_debug: ${{ github.event.inputs.is_debug == 'true' }}
+      target_os: ios
+      target_cpu: arm64
+      target_environment: simulator
+      enable_v8: true
+
+  ios_simulator_x64:
+    name: iOS simulator x64
+    uses: ./.github/workflows/build.yml
+    with:
+      branch: ${{ github.event.inputs.branch }}
+      version: ${{ github.event.inputs.version }}
+      is_debug: ${{ github.event.inputs.is_debug == 'true' }}
+      target_os: ios
+      target_cpu: x64
+      target_environment: simulator
+      enable_v8: false
+
+  ios_simulator_x64_v8:
+    name: iOS simulator x64 V8
+    if: github.event.inputs.enable_v8 == 'true'
+    needs: ios_simulator_x64
+    uses: ./.github/workflows/build.yml
+    with:
+      branch: ${{ github.event.inputs.branch }}
+      version: ${{ github.event.inputs.version }}
+      is_debug: ${{ github.event.inputs.is_debug == 'true' }}
+      target_os: ios
+      target_cpu: x64
+      target_environment: simulator
       enable_v8: true
 
   linux_arm:
@@ -519,10 +601,12 @@ jobs:
       - android_x64_v8
       - android_x86
       - android_x86_v8
-      - ios_arm64
-      - ios_arm64_v8
-      - ios_x64
-      - ios_x64_v8
+      - ios_device_arm64
+      - ios_device_arm64_v8
+      - ios_simulator_arm64
+      - ios_simulator_arm64_v8
+      - ios_simulator_x64
+      - ios_simulator_x64_v8
       - linux_arm
       - linux_arm_v8
       - linux_arm64
@@ -661,10 +745,10 @@ jobs:
       - android_x64_v8
       - android_x86
       - android_x86_v8
-      - ios_arm64
-      - ios_arm64_v8
-      - ios_x64
-      - ios_x64_v8
+      - ios_device_arm64
+      - ios_device_arm64_v8
+      - ios_simulator_x64
+      - ios_simulator_x64_v8
       - linux_arm
       - linux_arm_v8
       - linux_arm64
